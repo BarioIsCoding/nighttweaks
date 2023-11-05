@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NightTweaks</title>
+    <style>
+        :root {
+            --primary-color: #420a91;
+            --secondary-color: #620a91;
+            --text-glow-color: var(--primary-color);
+            --top-bar-color: rgba(84, 44, 79, 0.4); /* 40% transparent white background */
+        }
+
+        body {
+            background: linear-gradient(180deg, #0a0a0a, #1a1a1a);
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow-y: scroll;
+            user-select: none; /* Disable text selection on the entire website */
+        }
+
+        .top-bar {
+            width: 80%;
+            background: var(--top-bar-color);
+            border-radius: 8px; /* Reduced corner radius to 8px */
+            padding: 10px;
+            margin-top: 10px; /* 10px below the ceiling */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            animation: top-bar-animation 0.5s linear forwards; /* In-animation for the top bar */
+        }
+
+        @keyframes top-bar-animation {
+            0% {
+                width: 1px;
+            }
+            100% {
+                width: 80%;
+            }
+        }
+
+        .top-bar-text {
+            margin-right: 20px;
+            font-size: 1rem;
+            color: #ffffff; /* Label color set to white */
+            text-shadow: 0 0 8px var(--text-glow-color); /* Add glow effect to labels */
+            transform: translateX(-100%);
+            animation: fade-in 1s ease forwards;
+        }
+
+        .top-bar-text:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .top-bar-text:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .top-bar-text:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        .top-bar-text:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        .top-bar-text:nth-child(6) {
+            animation-delay: 1s;
+        }
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            border-radius: 12px; /* Rounded corners for the scrollbar */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 12px; /* Rounded corners for the scrollbar */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        .gradient-text {
+            background-image: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 36px;
+            text-align: center;
+            text-shadow: 0 0 8px var(--text-glow-color); /* Add glow effect to text */
+            animation: fade-in 1s ease forwards;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        /* Center text horizontally and vertically */
+        .container::after {
+            content: "";
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .container h1, .container p {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); /* Purple gradient background */
+            border-radius: 8px; /* Reduced corner radius to 8px */
+            padding: 10px 20px;
+            cursor: pointer;
+            outline-offset: 4px;
+            font-family: 'Montserrat', sans-serif; /* Montserrat Bold font */
+            transition: transform 0.3s; /* Smooth transition on click */
+            animation: fade-in 1s ease forwards;
+        }
+
+        .button a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .button:hover {
+            transform: scale(1.1); /* Make the button bigger on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-text">HOME</div>
+        <input type="button" id="runEmbedEditor" style="display: none;" />
+        <label for="runEmbedEditor" class="top-bar-text">EMBEDS</label>
+        <div class="top-bar-text">ANTIS</div>
+        <div class="top-bar-text">BACKUP</div>
+        <div class="top-bar-text">COLOR</div>
+        <div class="top-bar-text">HELP</div>
+    </div>
+    
+    <div class="container">
+        <h1 class="gradient-text">NightTweaks for Discord</h1>
+        <p>This is a stylish and clean UI with a gradient text effect.</p>
+        <div class="button-container">
+            <div class="button"><a href="#">Inject now!</a></div>
+        </div>
+    </div>
+
+    <div style="height: 1000px;"></div> <!-- Content to enable scrolling -->
+
+    <script>
+    const embedsButton = document.getElementById("runEmbedEditor");
+
+    embedsButton.addEventListener("click", function() {
+        // Execute the batch script
+        const scriptPath = 'embeds_script.bat';
+        const exec = require('child_process').exec;
+
+        exec(scriptPath, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`Error executing batch script: ${error}`);
+                return;
+            }
+            console.log(`Batch script output: ${stdout}`);
+        });
+    });
+</script>
+    </script>
+</body>
+</html>
