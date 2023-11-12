@@ -1,190 +1,247 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>NightTweaks Embed Generator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Embed Generator</title>
     <style>
+	h1 {
+            color: #fff; /* White color for h1 */
+        }
         :root {
             --primary-color: #420a91;
             --secondary-color: #620a91;
-            --text-glow-color: var(--primary-color);
-            --top-bar-color: rgba(84, 44, 79, 0.4); /* 40% transparent white background */
+            --background-gradient: linear-gradient(180deg, #0a0a0a, #1a1a1a);
+            --border-radius: 10px;
+            --font-family: 'Montserrat', sans-serif;
         }
 
         body {
-            background: linear-gradient(180deg, #0a0a0a, #1a1a1a);
-            margin: 0;
-            padding: 0;
-            font-family: 'Montserrat', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow-y: scroll;
-            user-select: none; /* Disable text selection on the entire website */
-        }
-
-        .top-bar {
-            width: 80%;
-            background: var(--top-bar-color);
-            border-radius: 8px; /* Reduced corner radius to 8px */
-            padding: 10px;
-            margin-top: 10px; /* 10px below the ceiling */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            animation: top-bar-animation 0.5s linear forwards; /* In-animation for the top bar */
-        }
-
-        @keyframes top-bar-animation {
-            0% {
-                width: 1px;
-            }
-            100% {
-                width: 80%;
-            }
-        }
-
-        .top-bar-text {
-            margin-right: 20px;
-            font-size: 1rem;
-            color: #ffffff; /* Label color set to white */
-            text-shadow: 0 0 8px var(--text-glow-color); /* Add glow effect to labels */
-            transform: translateX(-100%);
-            animation: fade-in 1s ease forwards;
-        }
-
-        .top-bar-text:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .top-bar-text:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        .top-bar-text:nth-child(4) {
-            animation-delay: 0.6s;
-        }
-
-        .top-bar-text:nth-child(5) {
-            animation-delay: 0.8s;
-        }
-
-        .top-bar-text:nth-child(6) {
-            animation-delay: 1s;
-        }
-
-        @keyframes fade-in {
-            0% {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-            border-radius: 12px; /* Rounded corners for the scrollbar */
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 12px; /* Rounded corners for the scrollbar */
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary-color);
-        }
-
-        .gradient-text {
-            background-image: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            color: transparent;
-            font-size: 36px;
-            text-align: center;
-            text-shadow: 0 0 8px var(--text-glow-color); /* Add glow effect to text */
-            animation: fade-in 1s ease forwards;
+            font-family: var(--font-family);
+            background: var(--background-gradient);
         }
 
         .container {
-            text-align: center;
+            width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .rectangle {
+            width: 800px;
+            height: 400px;
+            background: #2b2d31;
+            border-radius: 10px;
             position: relative;
         }
 
-        /* Center text horizontally and vertically */
-        .container::after {
-            content: "";
-            display: inline-block;
-            height: 100%;
-            vertical-align: middle;
+        .red-side {
+            width: 20px;
+            height: 400px;
+            background: #ff0000;
+            border-radius: 10px 0 0 10px;
+            position: absolute;
         }
 
-        .container h1, .container p {
-            display: inline-block;
-            vertical-align: middle;
+        .title {
+            font-family: var(--font-family);
+            font-size: 20px;
+            color: #0d95df;
+            text-decoration: none;
+            position: absolute;
+            top: 40px;
+            left: 50px;
+            transition: text-decoration 0.2s;
         }
 
-        .button-container {
+        .title:hover {
+            text-decoration: underline;
+        }
+
+        .description {
+            font-family: var(--font-family);
+            font-size: 16px;
+            color: #ffffff;
+            position: absolute;
+            top: 150px;
+            left: 50px;
+        }
+
+        .author {
+            font-family: var(--font-family);
+            font-size: 18px;
+            color: #0d95df;
+            text-decoration: none;
+            position: absolute;
+            top: 120px;
+            left: 50px;
+        }
+
+        .author:hover {
+            text-decoration: underline;
+        }
+
+        .provider {
+            font-family: var(--font-family);
+            font-size: 16px;
+            color: #9aabac;
+            position: absolute;
+            top: 20px;
+            left: 50px;
+        }
+
+        .icon {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            border-radius: 10px;
+        }
+
+        .image {
+            position: absolute;
+            top: 180px;
+            left: 50px;
+            max-width: 200px;
+        }
+
+        .input-label {
+            color: var(--primary-color);
+            font-size: 16px;
+            margin-top: 10px;
+            display: block;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        #embed-result {
+            display: none;
             margin-top: 20px;
         }
 
-        .button {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); /* Purple gradient background */
-            border-radius: 8px; /* Reduced corner radius to 8px */
-            padding: 10px 20px;
-            cursor: pointer;
-            outline-offset: 4px;
-            font-family: 'Montserrat', sans-serif; /* Montserrat Bold font */
-            transition: transform 0.3s; /* Smooth transition on click */
-            animation: fade-in 1s ease forwards;
+        #generated-command {
+            display: none;
+            margin-top: 20px;
         }
 
-        .button a {
-            text-decoration: none;
-            color: white;
-        }
-
-        .button:hover {
-            transform: scale(1.1); /* Make the button bigger on hover */
+        .result-text {
+            color: #fff;
+            font-size: 16px;
+            text-align: left;
+            margin-left: 40px;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
-    <div class="top-bar">
-        <div class="top-bar-text">HOME</div>
-        <div class="top-bar-text">
-            <a href="file:///C:/Users/Bario/Downloads/EmbedGenerator.html" target="_blank">EMBEDS</a>
-        </div>
-        <div class="top-bar-text">ANTIS</div>
-        <div class="top-bar-text">BACKUP</div>
-        <div class="top-bar-text">COLOR</div>
-        <div class="top-bar-text">HELP</div>
-    </div>
-    
     <div class="container">
-        <h1 class="gradient-text">Clean UI Example</h1>
-        <p>This is a stylish and clean UI with a gradient text effect.</p>
-        <div class="button-container">
-            <div class="button"><a href="#">Inject now!</a></div>
+        <h1 style="color:#ffffff">Discord Embed Generator</h1>
+        <div>
+            <label class="input-label" for="title">Title*:</label>
+            <input type="text" id="title" placeholder="Your Title Goes Here (string)" required>
+        </div>
+        <div>
+            <label class="input-label" for="description">Description*:</label>
+            <input type="text" id="description" placeholder="Your description text goes here. (string)" required>
+        </div>
+        <div>
+            <label class="input-label" for="provider">Provider Name:</label>
+            <input type="text" id="provider" placeholder="Provider Name (string)">
+        </div>
+        <div>
+            <label class="input-label" for="author">Author's Name:</label>
+            <input type="text" id="author" placeholder="Author's Name (string)">
+        </div>
+        <div>
+            <label class="input-label" for="authorURL">Author URL:</label>
+            <input type="text" id="authorURL" placeholder="https://example.com (url)">
+        </div>
+        <div>
+            <label class="input-label" for="color">Color:</label>
+            <input type="text" id="color" placeholder="#0d95df (hex color code)">
+        </div>
+        <div>
+            <label class="input-label" for="icon">Icon URL:</label>
+            <input type="text" id="icon" placeholder="your-icon-url.jpg (url)">
+        </div>
+        <div>
+            <label class="input-label" for="image">Image URL:</label>
+            <input type="text" id="image" placeholder="your-image-url.jpg (url)">
+        </div>
+        <div>
+            <label class="input-label" for="redirect">Redirect URL:</label>
+            <input type="text" id="redirect" placeholder="https://example.com (url)">
+        </div>
+        <button id="generate">Generate Embed</button>
+        <div id="embed-result">
+            <h2 style="color:#ffffff">Generated Embed:</h2>
+            <div class="rectangle">
+                <div class="red-side" id="color-preview"></div>
+                <div class="provider" id="provider-preview">Provider Name</div>
+                <a href="#" class="title" id="title-preview">Your Title Goes Here</a>
+                <a href="#" class="author" id="author-preview">Author's Name</a>
+                <div class="description" id="description-preview">Your description text goes here.</div>
+                <img src="your-icon-url.jpg" class="icon" alt="Icon" id="icon-preview">
+                <img src="your-image-url.jpg" class="image" alt="Image" id="image-preview">
+            </div>
+        </div>
+        <div id="generated-command">
+            <h2>Generated Command:</h2>
+            <textarea id="command-output" rows="5" cols="50" readonly></textarea>
         </div>
     </div>
-
-    <div style="height: 1000px;"></div> <!-- Content to enable scrolling -->
 
     <script>
-        // JavaScript to change text on button click
-        const button = document.getElementById("changeTextButton");
-        const textElements = document.querySelectorAll(".gradient-text");
-        const newText = "New Text with Gradient";
+        const generateButton = document.getElementById("generate");
+        const embedResult = document.getElementById("embed-result");
+        const commandOutput = document.getElementById("command-output");
+        const generatedCommand = document.getElementById("generated-command");
 
-        button.addEventListener("click", function() {
-            textElements.forEach(element => {
-                element.textContent = newText;
-            });
+        generateButton.addEventListener("click", function () {
+            const title = document.getElementById("title").value;
+            const description = document.getElementById("description").value;
+            const provider = document.getElementById("provider").value;
+            const author = document.getElementById("author").value;
+            const authorURL = document.getElementById("authorURL").value;
+            const color = document.getElementById("color").value;
+            const icon = document.getElementById("icon").value;
+            const image = document.getElementById("image").value;
+            const redirect = document.getElementById("redirect").value;
+
+            document.getElementById("title-preview").textContent = title;
+            document.getElementById("description-preview").textContent = description;
+            document.getElementById("provider-preview").textContent = provider;
+            document.getElementById("author-preview").textContent = author;
+            document.getElementById("author-preview").href = authorURL;
+            document.getElementById("color-preview").style.backgroundColor = color;
+            document.getElementById("icon-preview").src = icon;
+            document.getElementById("image-preview").src = image;
+            document.getElementById("title-preview").href = redirect;
+
+            const command = `/embed title: ${title}\ndescription: ${description}\ncolor: ${color}\nredirect: ${redirect}\nprovider: ${provider}\nauthor: ${author}\nauthor_url: ${authorURL}\nicon: ${icon}\nimage: ${image}\nredirect: ${redirect}\nprovider: ${provider}`;
+            commandOutput.value = command;
+
+            embedResult.style.display = "block";
+            generatedCommand.style.display = "block";
         });
     </script>
 </body>
